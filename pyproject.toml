@@ -2,11 +2,11 @@
 name = "fastapi-base"
 version = "0.1.0"
 description = ""
-authors = ["Omelchenko Michael <socanime@gmail.com>"]
+authors = ["Kuleshov Vitaliy <flashvita@yandex.ru>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.13"
 fastapi = "^0.103.1"
 uvicorn = {extras = ["standart"], version = "^0.23.2"}
 sqlalchemy = {extras = ["asyncio"], version = "^2.0.20"}
