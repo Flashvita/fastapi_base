@@ -2,7 +2,12 @@ FROM python:3.11 as requirements-stage
 
 WORKDIR /tmp
 
-RUN pip install poetry
+# For install poetry >=2.0
+# https://python-poetry.org/docs/pyproject#entry-points
+RUN pip install poetry && poetry self add poetry-plugin-export
+
+# For install poetry version <2.0 use command below
+# RUN pip install poetry
 
 COPY ./pyproject.toml ./poetry.lock* /tmp/
 
