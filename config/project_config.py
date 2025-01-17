@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     VERSION: str
     DEBUG: bool
     CORS_ALLOWED_ORIGINS: str
+    HOST: str
+    PORT: str
 
 
 settings = Settings()
