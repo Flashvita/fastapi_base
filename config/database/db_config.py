@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic import PostgresDsn
 from pydantic_settings import BaseSettings
 
@@ -13,7 +11,7 @@ class ConfigDataBase(BaseSettings):
     DB_ECHO_LOG: bool = False
 
     @property
-    def database_url(self) -> Optional[PostgresDsn]:
+    def database_url(self) -> PostgresDsn | None:
         return (
             f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@"
             f"{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"

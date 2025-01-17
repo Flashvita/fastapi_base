@@ -1,14 +1,16 @@
 from sqlalchemy import select
 from sqlalchemy.orm import load_only
 
-from src.repositories.sqlalchemy_repository import SqlAlchemyRepository, ModelType
-from src.models.category_model import CategoryModel
 from src.config.database.db_helper import db_helper
+from src.models.category_model import CategoryModel
+from src.repositories.sqlalchemy_repository import ModelType, SqlAlchemyRepository
 
 from ..schemas.category_schema import CategoryCreate, CategoryUpdate
 
 
-class CategoryRepository(SqlAlchemyRepository[ModelType, CategoryCreate, CategoryUpdate]):
+class CategoryRepository(
+    SqlAlchemyRepository[ModelType, CategoryCreate, CategoryUpdate]
+):
 
     async def filter(
         self,
@@ -42,4 +44,6 @@ class CategoryRepository(SqlAlchemyRepository[ModelType, CategoryCreate, Categor
             return result.scalar() is not None
 
 
-category_repository = CategoryRepository(model=CategoryModel, db_session=db_helper.get_db_session)
+category_repository = CategoryRepository(
+    model=CategoryModel, db_session=db_helper.get_db_session
+)

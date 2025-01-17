@@ -1,15 +1,14 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from src.config.project_config import settings
 from src.routes import get_apps_router
 
 
 def get_application() -> FastAPI:
     application = FastAPI(
-        title=settings.PROJECT_NAME,
-        debug=settings.DEBUG,
-        version=settings.VERSION
+        title=settings.PROJECT_NAME, debug=settings.DEBUG, version=settings.VERSION
     )
     application.include_router(get_apps_router())
 

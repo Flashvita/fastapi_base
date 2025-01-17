@@ -3,9 +3,9 @@ from contextlib import asynccontextmanager
 
 from sqlalchemy.ext.asyncio import (
     AsyncSession,
-    create_async_engine,
+    async_scoped_session,
     async_sessionmaker,
-    async_scoped_session
+    create_async_engine,
 )
 
 from .db_config import settings_db
@@ -16,16 +16,12 @@ class DatabaseHelper:
         self.engine = create_async_engine(url=url, echo=echo)
 
         self.session_factory = async_sessionmaker(
-            bind=self.engine,
-            autoflush=False,
-            autocommit=False,
-            expire_on_commit=False
+            bind=self.engine, autoflush=False, autocommit=False, expire_on_commit=False
         )
 
     def get_scope_session(self):
         return async_scoped_session(
-            session_factory=self.session_factory,
-            scopefunc=current_task
+            session_factory=self.session_factory, scopefunc=current_task
         )
 
     @asynccontextmanager

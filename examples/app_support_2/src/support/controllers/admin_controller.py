@@ -1,15 +1,15 @@
 from typing import Annotated
 
-from fastapi import Depends, HTTPException, Query, APIRouter
-from starlette.status import HTTP_400_BAD_REQUEST, HTTP_204_NO_CONTENT
+from fastapi import APIRouter, Depends, HTTPException, Query
+from starlette.status import HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST
 
+from ...schemas.user_schema import User
 from ..schemas.category_schema import (
     CategoryCreate,
+    CategoryListResponse,
     CategoryResponse,
-    CategoryListResponse
 )
 from ..services.category_service import category_service
-from ...schemas.user_schema import User
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -28,8 +28,7 @@ async def exists_category_for_name(name: str, user: User = Depends(is_admin)) ->
 
 @router.post("/category")
 async def create_category(
-        data: CategoryCreate,
-        user: User = Depends(is_admin)
+    data: CategoryCreate, user: User = Depends(is_admin)
 ) -> CategoryResponse:
     try:
         return await category_service.create(model=data)
@@ -63,17 +62,14 @@ async def get_single_category(pk: int) -> CategoryResponse:
 
 @router.get("/category")
 async def filter_category(
-        fields: Annotated[list, Query()] = [],
-        order: Annotated[list, Query()] = [],
-        limit: int | None = None,
-        offset: int | None = None
+    fields: Annotated[list, Query()] = [],
+    order: Annotated[list, Query()] = [],
+    limit: int | None = None,
+    offset: int | None = None,
 ) -> list[CategoryListResponse] | None:
     try:
         return await category_service.filter(
-            fields=fields,
-            order=order,
-            limit=limit,
-            offset=offset
+            fields=fields, order=order, limit=limit, offset=offset
         )
     except Exception as e:
         raise HTTPException(HTTP_400_BAD_REQUEST, str(e))

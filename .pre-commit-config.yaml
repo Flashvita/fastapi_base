@@ -1,0 +1,67 @@
+# default: update to latest tag on default branch
+# pre-commit autoupdate  # by default: pick tags
+# update a specific repository to the latest revision of the default branch
+# pre-commit autoupdate --bleeding-edge --repo https://github.com/pre-commit/pre-commit-hooks
+exclude: "^docs/|migrations/|examples/|commands_helper.txt"
+default_stages: [commit]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: debug-statements
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.17.0
+    hooks:
+      - id: pyupgrade
+        args: [--py311-plus]
+
+  # - repo: https://github.com/PyCQA/isort
+  #   rev: 5.13.2
+  #   hooks:
+  #     - id: isort
+
+  - repo: https://github.com/psf/black
+    rev: 24.8.0
+    hooks:
+      - id: black
+        exclude: ^.*\b(migrations)\b.*$
+
+  - repo: https://github.com/PyCQA/autoflake
+    rev: v2.3.1
+    hooks:
+      - id: autoflake
+
+  - repo:  https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.29.1
+    hooks:
+      - id: check-github-workflows
+      - id: check-dependabot
+
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-use-type-annotations
+      - id: python-check-blanket-noqa
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+
+    hooks:
+      - id: detect-secrets
+        exclude: '\*.env$|example.env|.env.stage|package.lock.json'
+        args: ['.secrets.baseline']
+
+  # - repo: local
+  #   hooks:
+  #     - id: tests
+  #       name: Run tests
+  #       entry: "bash run_tests.sh"
+  #       language: system
+  #       verbose: true

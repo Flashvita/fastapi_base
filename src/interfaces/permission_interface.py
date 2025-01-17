@@ -3,7 +3,6 @@ from typing import NewType
 
 from ..models.base_model import Base
 
-
 UserModel = NewType("UserModel", Base)
 
 

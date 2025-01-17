@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from .support.controllers import support_controller, admin_controller
+from .support.controllers import admin_controller, support_controller
 
 
 def get_apps_router():
