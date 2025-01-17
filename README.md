@@ -1,5 +1,14 @@
 # Базовый шаблон проекта для FastAPI
 
+## Локальный запуск проекта:
+### Сборка в докере:
+    docker compose up --build
+### Миграции БД
+#### Создание:
+    docker exec -it  api-template-back alembic revision -m "migration title"
+#### Применение:
+    docker exec -it  api-template-back alembic upgrade head
+
 ## Общее описание
 
 <img src="/examples/uow.jpg"/>
