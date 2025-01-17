@@ -22,16 +22,16 @@ repos:
       - id: pyupgrade
         args: [--py311-plus]
 
-  # - repo: https://github.com/PyCQA/isort
-  #   rev: 5.13.2
-  #   hooks:
-  #     - id: isort
-
   - repo: https://github.com/psf/black
     rev: 24.8.0
     hooks:
       - id: black
         exclude: ^.*\b(migrations)\b.*$
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
 
   - repo: https://github.com/PyCQA/autoflake
     rev: v2.3.1
