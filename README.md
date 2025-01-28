@@ -2,10 +2,11 @@
 
 ## Локальный запуск проекта:
 ### Сборка в докере:
+    создать файл .env скопировав содержимое из example.env
     docker compose up --build
 ### Миграции БД
 #### Создание:
-    docker exec -it  api-template-back alembic revision -m "migration title"
+    docker exec -it  api-template-back alembic revision --autogenerate -m "migration title"
 #### Применение:
     docker exec -it  api-template-back alembic upgrade head
 

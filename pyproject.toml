@@ -9,12 +9,13 @@ readme = "README.md"
 python = "^3.13"
 poetry = "^2.0"
 pre-commit = "^4.0.1"
-fastapi = "^0.103.1"
+fastapi = "^0.115.7"
 uvicorn = {extras = ["standart"], version = "^0.23.2"}
 sqlalchemy = {extras = ["asyncio"], version = "^2.0.20"}
-alembic = "^1.12.0"
+alembic = "^1.14.1"
 pydantic-settings = "^2.0.3"
-
+isort = "^5.13.2"
+black = "^24.10.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -23,3 +24,6 @@ pytest = "^7.4.2"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
